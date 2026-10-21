@@ -452,12 +452,12 @@ howitworks:
   script:
     - apt-get update -qq && apt-get install -yqq git > /dev/null
     - npm install -g @anthropic-ai/claude-code
-    - npx howitworks-cli@0.3.4 . -o docs/architecture
+    - npx howitworks-cli@0.4.1 . -o docs/architecture
     - git add docs/architecture
     - git diff --cached --quiet || (git -c user.name="howitworks" -c user.email="ci@example.com" commit -m "Update architecture diagram" && git push "https://oauth2:${HOWITWORKS_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" HEAD:$CI_DEFAULT_BRANCH)
 ```
 
-Claude Code needs a login on the runner: run `claude setup-token` on your machine and save the token as a masked CI/CD variable named `CLAUDE_CODE_OAUTH_TOKEN`. Also add `HOWITWORKS_TOKEN`, a project access token with write access. The job pins a version (`howitworks-cli@0.3.4`) so it only runs a release you chose; update it when you upgrade.
+Claude Code needs a login on the runner: run `claude setup-token` on your machine and save the token as a masked CI/CD variable named `CLAUDE_CODE_OAUTH_TOKEN`. Also add `HOWITWORKS_TOKEN`, a project access token with write access. The job pins a version (`howitworks-cli@0.4.1`) so it only runs a release you chose; update it when you upgrade.
 
 To have AI assistants use the result, add `--agents`: it adds one line to the repo's `CLAUDE.md` and/or `AGENTS.md` pointing at `ARCHITECTURE.md`, and leaves the rest of the file alone.
 
